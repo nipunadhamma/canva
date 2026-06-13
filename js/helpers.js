@@ -1,12 +1,8 @@
-// helpers.js
-window.canvas = null; // ගෝලීය වශයෙන් canvas එක තබා ගන්න
+// helpers.js ගොනුවේ මුලින්ම මෙය තිබිය යුතුයි
+window.canvas = null; 
 
 function initCanvas() {
-    window.canvas = new fabric.Canvas('canvas', {
-        width: 900,
-        height: 500,
-        backgroundColor: '#ffffff'
-    });
+    window.canvas = new fabric.Canvas('c'); // 'c' යනු ඔබේ HTML හි ඇති canvas ID එකයි
     console.log("Canvas initialized successfully!");
 }
 
