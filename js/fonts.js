@@ -10,7 +10,7 @@ const FONT_LIST = [
     { name: "FM Bindumathi", file: "fonts/5%20FM_Bindumathi%20sinhala%20font%20by%20Aluth.com.TTF", category: "Sinhala" },
     { name: "THARU", file: "fonts/tharu_digital_mahee.ttf", category: "Sinhala" },
     { name: "THARU_1", file: "fonts/TharuDigitalNikini.ttf", category: "Sinhala" },
-    { name: "Arana", file: "fonts/tharu_digital_mahee.ttf", category: "Sinhala" },
+    { name: "Arana", file: "fonts/cpw_arana.ttf", category: "Sinhala" },
 ];
 
 let previewText = "AaBbCc අකුරු";
