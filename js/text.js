@@ -3,37 +3,33 @@
 // CLEAN + FIXED VERSION
 // ===================================
 
-
 // ================================
 // ADD TEXT
 // ================================
 window.addText = function () {
-
     const canvas = getCanvas();
     if (!canvas) return;
 
     const text = new fabric.Textbox("Type here...", {
-    left: 100,
-    top: 100,
-    width: 250,
-    fontSize: 30,
-    fontFamily: "FM-Arjunn", // මෙහි නම හරියටම ඔබේ FONT_LIST එකේ ඇති නම දෙන්න
-    fill: "#000000",
-    editable: true,
-    textBaseline: 'alphabetic' // අනිවාර්යයෙන්ම එක් කරන්න
-});
-canvas.add(text);
+        left: 100,
+        top: 100,
+        width: 250,
+        fontSize: 30,
+        fontFamily: "FM-Arjunn",
+        fill: "#000000",
+        editable: true
+        // textBaseline ඉවත් කරන ලදී (දෝෂ මඟහරවා ගැනීමට)
+    });
+
     canvas.add(text);
     canvas.setActiveObject(text);
     canvas.requestRenderAll();
 };
 
-
 // ================================
 // FONT FAMILY CHANGE
 // ================================
 window.changeFontFamily = function (fontName) {
-
     const canvas = getCanvas();
     if (!canvas) return;
 
@@ -41,35 +37,30 @@ window.changeFontFamily = function (fontName) {
     if (!obj || (obj.type !== "textbox" && obj.type !== "text")) return;
 
     obj.set("fontFamily", fontName);
-
-    if (obj.initDimensions) obj.initDimensions();
-
+    
+    // Canvas update ආරක්ෂිත කිරීම
+    if (typeof obj.initDimensions === 'function') obj.initDimensions();
     canvas.requestRenderAll();
 };
-
 
 // ================================
 // FONT SIZE
 // ================================
 window.changeFontSize = function (size) {
-
     const canvas = getCanvas();
     if (!canvas) return;
 
     const obj = canvas.getActiveObject();
     if (!obj) return;
 
-    obj.set("fontSize", parseInt(size));
-
+    obj.set("fontSize", parseInt(size) || 30);
     canvas.requestRenderAll();
 };
-
 
 // ================================
 // TEXT COLOR
 // ================================
 window.changeTextColor = function (color) {
-
     const canvas = getCanvas();
     if (!canvas) return;
 
@@ -77,10 +68,8 @@ window.changeTextColor = function (color) {
     if (!obj) return;
 
     obj.set("fill", color);
-
     canvas.requestRenderAll();
 };
-
 
 // ================================
 // QUICK SINHALA FONT
@@ -89,12 +78,10 @@ window.applySinhalaFont = function () {
     changeFontFamily("FM Abhaya");
 };
 
-
 // ================================
 // UI SYNC (Properties Panel)
 // ================================
 window.updateTextUI = function () {
-
     const canvas = getCanvas();
     if (!canvas) return;
 
@@ -105,6 +92,7 @@ window.updateTextUI = function () {
     const color = document.getElementById("colorPicker");
     const family = document.getElementById("fontFamily");
 
+    // වටිනාකම් පවතින බව තහවුරු කරගැනීමෙන් දෝෂ මඟහරවයි
     if (size) size.value = obj.fontSize || 30;
     if (color) color.value = obj.fill || "#000000";
     if (family) family.value = obj.fontFamily || "Arial";
@@ -113,8 +101,7 @@ window.updateTextUI = function () {
 // ================================
 // LIVE SHADOW SYSTEM
 // ================================
-function applyShadowLive() {
-
+window.applyShadowLive = function() {
     const canvas = getCanvas();
     if (!canvas) return;
 
@@ -134,30 +121,26 @@ function applyShadowLive() {
     }));
 
     canvas.requestRenderAll();
-}
-
+};
 
 // ================================
 // LIVE OUTLINE SYSTEM
 // ================================
-function applyOutlineLive() {
+window.applyOutlineLive = function() {
     const canvas = getCanvas();
     if (!canvas) return;
 
     const obj = canvas.getActiveObject();
-    // දැන් Image සහ Text දෙකටම වැඩ කිරීමට මෙය වෙනස් කළා
     if (!obj || (obj.type !== "textbox" && obj.type !== "text" && obj.type !== "image")) return;
 
     const colorEl = document.getElementById("outlineColor");
     const sizeEl = document.getElementById("outlineSize");
     const display = document.getElementById("outlineValueDisplay");
     
-    // 1. අගය පෙන්වන තිරය යාවත්කාලීන කිරීම (Object එකෙන් පිටත)
     if (display && sizeEl) {
         display.innerText = sizeEl.value;
     }
 
-    // 2. Object එකේ ගුණාංග සැකසීම (කොමා භාවිතා කරමින්)
     obj.set({
         stroke: colorEl ? colorEl.value : "#000",
         strokeWidth: sizeEl ? parseFloat(sizeEl.value) : 0,
@@ -166,13 +149,12 @@ function applyOutlineLive() {
     });
     
     canvas.requestRenderAll();
-}
+};
 
 // ================================
 // REMOVE OUTLINE
 // ================================
 window.removeTextOutline = function () {
-
     const canvas = getCanvas();
     if (!canvas) return;
 
@@ -187,12 +169,10 @@ window.removeTextOutline = function () {
     canvas.requestRenderAll();
 };
 
-
 // ================================
-// EMBOSS EFFECT (CLEAN)
+// EMBOSS EFFECT
 // ================================
 window.setEmbossEffect = function (color = "#000") {
-
     const canvas = getCanvas();
     if (!canvas) return;
 
@@ -214,12 +194,10 @@ window.setEmbossEffect = function (color = "#000") {
     canvas.requestRenderAll();
 };
 
-
 // ================================
 // CLEAR ALL EFFECTS
 // ================================
 window.clearTextEffects = function () {
-
     const canvas = getCanvas();
     if (!canvas) return;
 
@@ -235,23 +213,18 @@ window.clearTextEffects = function () {
     canvas.requestRenderAll();
 };
 
-
 // ================================
-// LIVE EVENTS (IMPORTANT FIX)
+// INITIALIZATION
 // ================================
 window.addEventListener("load", function () {
-
-    const canvas = getCanvas();
-    if (!canvas) return;
-
-    canvas.on("selection:created", updateTextUI);
-    canvas.on("selection:updated", updateTextUI);
-    canvas.on("object:modified", updateTextUI);
+    // Canvas සූදානම් වූ විට පමණක් Event listeners එකතු කරන්න
+    const checkCanvas = setInterval(() => {
+        const canvas = getCanvas();
+        if (canvas) {
+            canvas.on("selection:created", updateTextUI);
+            canvas.on("selection:updated", updateTextUI);
+            canvas.on("object:modified", updateTextUI);
+            clearInterval(checkCanvas);
+        }
+    }, 500);
 });
-
-
-// ================================
-// SAFE EXPORT FUNCTIONS
-// ================================
-window.applyShadowLive = applyShadowLive;
-window.applyOutlineLive = applyOutlineLive;
