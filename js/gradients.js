@@ -1,34 +1,47 @@
-window.applyGradientTemplate = function(type) {
+// ================================
+// GRADIENT SYSTEM (FIXED VERSION)
+// ================================
+
+// 1. Modal පාලනය
+window.openGradientModal = function() {
+    const modal = document.getElementById('gradientEditor');
+    if (modal) modal.classList.remove('hidden');
+};
+
+window.closeGradientModal = function() {
+    const modal = document.getElementById('gradientEditor');
+    if (modal) modal.classList.add('hidden');
+};
+
+// 2. Gradient Apply කිරීම (Fabric.js v5+ සඳහා නිවැරදි ක්‍රමය)
+window.applyGradient = function() {
     const canvas = getCanvas();
-    if (!canvas) return; // Canvas නැත්නම් නතර කරන්න
+    if (!canvas) return;
 
     const obj = canvas.getActiveObject();
     if (!obj) {
-        alert("Select an object first!");
+        alert("Please select an object first!");
         return;
     }
-  
 
-    // Fabric.js Gradient Object එක නිර්මාණය කිරීම
+    // වැදගත්: මෙතැනදී HTML Input එකෙන් අගයන් ලබා ගනී
+    const color1 = document.getElementById("gradColor1").value; 
+    const color2 = document.getElementById("gradColor2").value;
+
+    console.log("Applying colors:", color1, color2); // දෝෂ පරීක්ෂාවට
+
     const gradient = new fabric.Gradient({
         type: 'linear',
-        gradientUnits: 'pixels', // හෝ 'percentage'
+        gradientUnits: 'pixels',
         coords: { x1: 0, y1: 0, x2: obj.width, y2: 0 },
-        colorStops: type === 'fade' ? {
-            0: document.getElementById("gradColor1").value,
-            1: 'rgba(0, 0, 0, 0)'
-        } : {
-            0: document.getElementById("gradColor1").value,
-            0.5: document.getElementById("gradColor2").value,
-            1: '#000000'
-        }
+        colorStops: [
+            { offset: 0, color: color1 }, // මෙතැනට වර්ණය ලැබිය යුතුයි
+            { offset: 1, color: color2 }
+        ]
     });
 
-    // මෙතැනදී setGradient වෙනුවට fill ලෙස අගය දීම සිදු කරයි
     obj.set("fill", gradient);
-    
     canvas.requestRenderAll();
     
     if (typeof saveState === "function") saveState();
-    closeGradientModal();
 };
