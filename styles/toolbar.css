@@ -1,0 +1,30 @@
+/* ටූල්බාර් එකේ මූලික හැඩය */
+#toolbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+    background-color: #333;
+    border-right: 1px solid #000;
+}
+
+/* එක එක් ටූල් එකක පෙනුම (Button/Icon) */
+.tool-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 5px;
+    background-color: #444;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ccc;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+/* මවුස් එක උඩින් යන විට (Hover effect) */
+.tool-icon:hover {
+    background-color: #555;
+    color: white;
+}

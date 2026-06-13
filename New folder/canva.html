@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <title>මගේ සංස්කරණ මෘදුකාංගය</title>
+    <style>
+        /* CSS කොටස: මෙහි මෘදුකාංගයේ පෙනුම සකසන කේත ඇත */
+        body { margin: 0; display: flex; flex-direction: column; height: 100vh; background-color: #2c2c2c; color: white; font-family: sans-serif; }
+        
+        /* ඉහළ මෙනු තීරුව */
+        .top-menu { background: #333; padding: 10px; display: flex; gap: 20px; border-bottom: 1px solid #000; }
+        
+        /* ප්‍රධාන වැඩබිම */
+        .main-area { display: flex; flex: 1; }
+        
+        /* වම් පස ඇති ටූල් තීරුව */
+        .toolbar { width: 50px; background: #333; padding: 10px; display: flex; flex-direction: column; gap: 15px; }
+        
+        /* මැද ඇති කැන්වස් එක */
+        .canvas { flex: 1; display: flex; justify-content: center; align-items: center; }
+        .artboard { width: 600px; height: 400px; background: white; border: 2px solid #ccc; }
+        
+        /* දකුණු පස ඇති ලේයර්ස් සහ පැනල් */
+        .sidebar { width: 250px; background: #333; padding: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="top-menu">
+        <div>ගොනුව (File)</div>
+        <div>සංස්කරණය (Edit)</div>
+        <div>අනුරූප (Image)</div>
+        <div>ස්තර (Layer)</div>
+        </div>
+
+    <div class="main-area">
+        <div class="toolbar">
+            <div>ටූල් 1</div>
+            <div>ටූල් 2</div>
+            <div>ටූල් 3</div>
+            </div>
+
+        <div class="canvas">
+            <div class="artboard"></div>
+        </div>
+
+        <div class="sidebar">
+            <h3>ලේයර්ස් (Layers)</h3>
+            <div style="background: #444; padding: 10px;">පසුබිම (Background)</div>
+            </div>
+    </div>
+
+</body>
+</html>
