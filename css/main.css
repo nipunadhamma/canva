@@ -136,14 +136,14 @@ body {
   justify-content: center;
   align-items: center;
   overflow: auto;  
-  padding: 50px;
+  padding: px;
 }
 
 /* =========================
    RIGHT PROPERTIES PANEL
 ========================= */
 #properties {
-  width: 220px;
+  width: 150px;
   background: #f5f5f5;
   padding: 10px;
 }
@@ -151,7 +151,7 @@ body {
 /* inputs */
 #properties input,
 #properties select {
-  width: 100%;
+  width: 95%;
   margin-bottom: 10px;
   padding: 6px;
 }
@@ -331,68 +331,74 @@ font-size:14px;
   background:#444;
 }
 
-/* =========================
-   PRO LAYER ITEM (FIXED)
-========================= */
+/* =========================================
+   PRO LAYER ITEM SYSTEM
+   ========================================= */
 
-.layer-item{
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-
-  padding:8px;
-  margin:4px 0;
-
-  background:#2b2b2b;
-  color:white;
-  border-radius:6px;
-
-  cursor:pointer;
-  transition:0.2s;
+.layer-item {
+    display: flex;
+    flex-direction: ;
+    gap: 6px;
+    padding: 8px;
+    margin: 4px 0;
+    background: #2b2b2b;
+    color: #ffffff;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease;
 }
 
-.layer-item:hover{
-  background:#3a3a3a;
+.layer-item:hover {
+    background: #3a3a3a;
 }
 
-/* layer name */
-.layer-item span{
-  font-size:13px;
-  font-weight:600;
-  overflow:hidden;
-  white-space:nowrap;
-  text-overflow:ellipsis;
+/* Layer Name Styling */
+.layer-item span {
+    font-size: 13px;
+    font-weight: 600;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
-/* opacity slider */
-.layer-item input[type="range"]{
-  width:100%;
-  height:3px;
-  cursor:pointer;
+/* Opacity Slider Styling */
+.layer-item input[type="range"] {
+    width: 90%;
+    height: 1px;
+    cursor: pointer;
+    background: #555;
+    border-radius: 1px;
 }
 
-/* button row */
-.layer-item div{
-  display:flex;
-  justify-content:flex-end;
-  gap:6px;
+/* Button Container Row */
+.layer-item div {
+    display: flex;
+    justify-content: flex-end;
+    gap: 2px;
+    margin-top: 2px;
 }
 
-/* buttons */
-.layer-item button{
-  background:#444;
-  border:none;
-  color:white;
-  padding:4px 6px;
-  border-radius:4px;
-  cursor:pointer;
-  font-size:12px;
+/* Action Buttons Styling */
+.layer-item button {
+    background: #444;
+    border: none;
+    color: #ffffff;
+    padding: 2px 4px;
+    border-radius: 1px;
+    cursor: pointer;
+    font-size: 10px;
+    transition: background 0.2s;
 }
 
-.layer-item button:hover{
-  background:#666;
+.layer-item button:hover {
+    background: #666;
 }
 
+/* Optional: Active State Styling */
+.layer-item.active {
+    border: 1px solid #3498db;
+    background: #333;
+}
 #contextMenu button {
     width: 100%;
     background: none;
@@ -416,19 +422,27 @@ font-size:14px;
 .hidden {
     display: none;
 }
-.layer-item.active{
-    border:2px solid #4da3ff;
-    background:#3a3a3a;
+
+
+
+/* Gradient Editor panel eka drag karanna */
+#gradientEditor {
+    position: absolute; /* Mehema thibbaama thiraaye kemathi thanakata geniyanna puluwan */
+    top: 100px;
+    left: 100px;
+    width: 100px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 15px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+    cursor: move; /* Drag karana bawa pennanna */
+    z-index: 9999;
+    border-radius: 8px;
 }
 
-.layer-controls {
-    display: flex;
-    gap: 5px;
+/* Panel eke visible/hidden */
+.hidden {
+    display: none;
 }
-.layer-controls button {
-    padding: 4px 8px;
-    font-size: 12px;
-}
-
 
 
