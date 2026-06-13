@@ -1,3 +1,19 @@
+// ================================
+// GRADIENT SYSTEM (FINAL VERSION)
+// ================================
+
+// 1. Modal එක පෙන්වීමට
+window.openGradientModal = function() {
+    document.getElementById('gradientModal').style.display = 'block';
+};
+
+// 2. Modal එක වැසීමට
+window.closeGradientModal = function() {
+    document.getElementById('gradientModal').style.display = 'none';
+};
+
+
+
 window.applyGradient = function () {
     const activeObj = canvas.getActiveObject();
 
