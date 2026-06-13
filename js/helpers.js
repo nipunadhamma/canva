@@ -1,14 +1,17 @@
-// helpers.js ගොනුවේ මුලින්ම මෙය තිබිය යුතුයි
-window.canvas = null; 
+window.canvas = null;
 
 function initCanvas() {
-    window.canvas = new fabric.Canvas('c'); // 'c' යනු ඔබේ HTML හි ඇති canvas ID එකයි
+    window.canvas = new fabric.Canvas('canvas', {
+        width: 900,
+        height: 500,
+        backgroundColor: '#ffffff'
+    });
     console.log("Canvas initialized successfully!");
 }
 
 function getCanvas() {
     if (!window.canvas) {
-        console.error("Canvas not initialized!");
+        console.warn("Canvas not initialized!");
         return null;
     }
     return window.canvas;
