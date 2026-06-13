@@ -6,9 +6,11 @@ const FONT_LIST = [
     { name: "Arial", file: null, category: "English" },
     { name: "Poppins", file: "fonts/Poppins.ttf", category: "English" },
     { name: "FM-Arjunn", file: "fonts/FM-Arjunn.TTF", category: "Sinhala" },
-    { name: "FM Abhaya", file: "fonts/AbhayaLibre-Bold.ttf", category: "Sinhala" },
+    { name: "FM Abhaya", file: "fonts/FMAbhaya%20x.ttf", category: "Sinhala" },
     { name: "FM Bindumathi", file: "fonts/5%20FM_Bindumathi%20sinhala%20font%20by%20Aluth.com.TTF", category: "Sinhala" },
     { name: "THARU", file: "fonts/tharu_digital_mahee.ttf", category: "Sinhala" },
+    { name: "THARU_1", file: "fonts/TharuDigitalNikini.ttf", category: "Sinhala" },
+    { name: "Arana", file: "fonts/tharu_digital_mahee.ttf", category: "Sinhala" },
 ];
 
 let previewText = "AaBbCc අකුරු";
