@@ -311,12 +311,12 @@ font-size:14px;
 .panel input,
 .panel select,
 .panel button{
-  width:100%;
-  margin-bottom:10px;
+  width:90%;
+  margin-bottom:5px;
   padding:6px;
   border-radius:6px;
   border:1px solid #ccc;
-  font-size:13px;
+  font-size:10px;
 }
 
 /* buttons */
