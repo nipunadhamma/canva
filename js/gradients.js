@@ -7,6 +7,7 @@ window.applyGradientTemplate = function(type) {
         alert("Select an object first!");
         return;
     }
+    console.log("Gradient Script Loaded");
 
     // Fabric.js Gradient Object එක නිර්මාණය කිරීම
     const gradient = new fabric.Gradient({
