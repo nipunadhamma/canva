@@ -97,11 +97,18 @@
 
     <!-- ================= GRADIENT ================= -->
 
-    <label>Gradient Start</label>
-<input type="color" id="gradColor1" value="#ff0000">
-<label>Gradient End</label>
-<input type="color" id="gradColor2" value="#0000ff">
-<button onclick="applyGradient()">Gradient</button>
+    <div id="gradientModal" style="display:none; position:fixed; top:20%; left:30%; background:#fff; padding:20px; border-radius:10px; z-index:1000; border:1px solid #ccc;">
+               <h3>Gradient Options</h3>
+          <label>Color 1:</label>
+          <input type="color" id="gradColor1" value="#ff0000"><br><br>
+    
+          <label>Color 2:</label>
+          <input type="color" id="gradColor2" value="#0000ff"><br><br>
+    
+         <button onclick="applyGradientTemplate('fade')">Apply Fade (Transparent)</button>
+         <button onclick="applyGradientTemplate('multi')">Apply Multi-Color</button>
+         <button onclick="closeGradientModal()">Close</button>
+    </div>
 
   </div>
 
