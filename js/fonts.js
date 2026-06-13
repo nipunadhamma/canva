@@ -8,7 +8,7 @@ const FONT_LIST = [
     { name: "FM-Arjunn", file: "fonts/FM-Arjunn.TTF", category: "Sinhala" },
     { name: "FM Abhaya", file: "fonts/AbhayaLibre-Bold.ttf", category: "Sinhala" },
     { name: "FM Bindumathi", file: "fonts/5 FM_Bindumathi sinhala font by Aluth.com.TTF", category: "Sinhala" },
-    { name: "THARU", file: "fonts/TharuDigitalSinhalaCooper.ttf", category: "Sinhala" },
+    { name: "THARU", file: "fonts/tharu_digital_mahee.ttf", category: "Sinhala" },
 ];
 
 let previewText = "AaBbCc අකුරු";
