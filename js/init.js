@@ -1,76 +1,60 @@
-/**
- * CANVA MINI PRO - INITIALIZATION SYSTEM
- */
+// ================================
+// GRADIENT SYSTEM (FIXED VERSION)
+// ================================
 
-window.onload = function () {
-    try {
-        // ======================================
-        // 1. INITIALIZE CANVAS (Essential)
-        // ======================================
-        initCanvas();
-
-        const canvas = getCanvas();
-        if (!canvas) throw new Error("Canvas initialization failed!");
-
-        // ======================================
-        // 2. TEXT UI EVENTS
-        // ======================================
-        canvas.on("selection:created", updateTextUI);
-        canvas.on("selection:updated", updateTextUI);
-        canvas.on("object:modified", updateTextUI);
-        canvas.on("selection:cleared", updateTextUI);
-
-        // ======================================
-        // 3. LAYERS SYSTEM (Syncs when changes occur)
-        // ======================================
-        canvas.on("object:added", syncLayers);
-        canvas.on("object:removed", syncLayers);
-        canvas.on("object:modified", syncLayers);
-        
-        // Initial Layer Render
-        syncLayers();
-
-        // ======================================
-        // 4. HISTORY SYSTEM (Optional/Safe Call)
-        // ======================================
-        if (typeof initHistoryEvents === "function") {
-            initHistoryEvents();
-        }
-        if (typeof saveState === "function") {
-            saveState();
-        }
-
-        // ======================================
-        // 5. FONTS & UI TOOLS
-        // ======================================
-        if (typeof loadFonts === 'function') {
-            loadFonts();
-        }
-
-        // ======================================
-        // 6. CONTEXT MENU
-        // ======================================
-        if (typeof createContextMenu === 'function') {
-            createContextMenu();
-        }
-        if (typeof bindContextMenu === 'function') {
-            bindContextMenu(canvas);
-        }
-
-        console.log("Editor loaded and ready.");
-
-    } catch (err) {
-        console.error("Initialization error:", err.message);
-        // අවශ්‍ය නම් පරිශීලකයාට දෝෂයක් ඇති බව පෙන්වීමට මෙතනදී UI එකක් ඇමතිය හැක
-    }
+// 1. Modal පාලනය
+window.openGradientModal = function() {
+    const modal = document.getElementById('gradientEditor');
+    if (modal) modal.classList.remove('hidden');
 };
 
-/**
- * අතිරේක: Canvas එක Resize වන විට එය පාලනය කිරීමට
- */
-window.addEventListener('resize', () => {
+window.closeGradientModal = function() {
+    const modal = document.getElementById('gradientEditor');
+    if (modal) modal.classList.add('hidden');
+};
+
+// 2. Gradient Apply කිරීම (Fabric.js v5+ සඳහා නිවැරදි ක්‍රමය)
+window.applyGradient = function() {
     const canvas = getCanvas();
-    if (canvas) {
-        canvas.requestRenderAll();
-    }
-});
+    const obj = canvas.getActiveObject();
+    if (!obj) return alert("Select an object!");
+
+    const color1 = document.getElementById("gradColor1").value;
+    const color2 = document.getElementById("gradColor2").value;
+
+    const gradient = new fabric.Gradient({
+        type: 'linear',
+        gradientUnits: 'pixels',
+        coords: { x1: 0, y1: 0, x2: obj.width, y2: 0 },
+        colorStops: [
+            { offset: 0, color: color1 },
+            { offset: 1, color: color2 }
+        ]
+    });
+
+    obj.set("fill", gradient);
+    canvas.requestRenderAll();
+    if (typeof saveState === "function") saveState();
+};
+
+// එක පැත්තක් සම්පූර්ණයෙන්ම Transparent කිරීමට
+window.applyFadeEffect = function() {
+    const canvas = getCanvas();
+    const obj = canvas.getActiveObject();
+    if (!obj) return;
+
+    const color1 = document.getElementById("gradColor1").value;
+
+    const gradient = new fabric.Gradient({
+        type: 'linear',
+        gradientUnits: 'pixels',
+        coords: { x1: 0, y1: 0, x2: obj.width, y2: 0 },
+        colorStops: [
+            { offset: 0, color: color1 },
+            { offset: 1, color: 'rgba(0,0,0,0)' }
+        ]
+    });
+
+    obj.set("fill", gradient);
+    canvas.requestRenderAll();
+};
