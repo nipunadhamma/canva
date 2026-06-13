@@ -12,45 +12,52 @@ window.closeGradientModal = function() {
     document.getElementById('gradientModal').style.display = 'none';
 };
 
+// 3. Gradient Templates ක්‍රියාත්මක කිරීමට
+window.applyGradientTemplate = function(type) {
+    const canvas = getCanvas();
+    const obj = canvas.getActiveObject();
 
-
-window.applyGradient = function () {
-    const activeObj = canvas.getActiveObject();
-
-    if (!activeObj) {
-        alert("Select an object first.");
+    if (!obj) {
+        alert("Select an object (Text or Shape) first!");
         return;
     }
 
-    // 1. වර්ණ ලබා ගැනීම
-    const color1 = document.getElementById("gradColor1").value;
-    // Transparent සඳහා rgba(0,0,0,0) හෝ ඕනෑම වර්ණයක අවසාන අගය 0 කිරීම
-    const color2 = 'rgba(0, 0, 0, 0)'; 
+    let gradientConfig = {};
 
-    // 2. Gradient එක නිර්මාණය කිරීම
-    const gradient = new fabric.Gradient({
-        type: 'linear',
-        gradientUnits: 'boundingbox',
-        coords: { 
-            x1: 0, 
-            y1: 0, 
-            x2: activeObj.width, 
-            y2: 0 
-        },
-        colorStops: [
-            { offset: 0, color: color1 }, // වම් පැත්ත: තෝරාගත් පාට
-            { offset: 1, color: color2 }  // දකුණු පැත්ත: Transparent
-        ]
-    });
+    // Template 1: Fade (එක පැත්තක් Transparent)
+    if (type === 'fade') {
+        gradientConfig = {
+            type: 'linear',
+            x1: 0, y1: 0, x2: obj.width, y2: 0,
+            colorStops: {
+                0: document.getElementById("gradColor1").value,
+                1: 'rgba(0, 0, 0, 0)' // Transparent
+            }
+        };
+    } 
+    // Template 2: Multi-color (තැන් කිහිපයක පාට)
+    else if (type === 'multi') {
+        gradientConfig = {
+            type: 'linear',
+            x1: 0, y1: 0, x2: obj.width, y2: 0,
+            colorStops: {
+                0: document.getElementById("gradColor1").value,
+                0.5: document.getElementById("gradColor2").value,
+                1: '#000000' // අගට කළු පාට
+            }
+        };
+    }
 
-    // 3. වස්තුවට Gradient එක අදාළ කිරීම
-    activeObj.set("fill", gradient);
-
-    // 4. Canvas එක update කිරීම
+    // Fabric.js වස්තුවට gradient එක ලබා දීම
+    obj.setGradient('fill', gradientConfig);
+    
+    // Canvas එක update කිරීම
     canvas.requestRenderAll();
-
-    // 5. History සඳහා save කිරීම
+    
+    // History (Undo/Redo) සක්‍රීය කිරීම
     if (typeof saveState === "function") {
         saveState();
     }
+
+    closeGradientModal();
 };
