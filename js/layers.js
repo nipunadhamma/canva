@@ -133,7 +133,24 @@ function reorderLayers(from, to) {
 // =============================
 window.setLayerOpacity = (el, obj) => { if(obj) obj.set("opacity", parseFloat(el.value)); getCanvas().renderAll(); };
 window.toggleLayer = (btn, obj) => { if(obj) obj.set("visible", !(obj.visible !== false)); getCanvas().renderAll(); syncLayers(); };
-window.lockLayer = (btn, obj) => { if(obj) obj.set({ selectable: !(obj.selectable === false), evented: !(obj.selectable === false) }); getCanvas().renderAll(); syncLayers(); };
+window.lockLayer = (btn, obj) => {
+    if (!obj) return;
+    
+    // දැනට ඇති තත්ත්වය පරීක්ෂා කරන්න
+    const isLocked = obj.selectable === false;
+    
+    // අනිත් පැත්තට හරවන්න (Lock නම් Unlock කරන්න, Unlock නම් Lock කරන්න)
+    const newState = isLocked; 
+
+    obj.set({
+        selectable: newState, // true නම් තෝරාගත හැක, false නම් බැහැ
+        evented: newState     // true නම් සිදුවීම් ක්‍රියාත්මකයි, false නම් නැහැ
+    });
+    
+    // කැන්වසය නැවත ඇඳීම සහ ලැයිස්තුව යාවත්කාලීන කිරීම
+    getCanvas().renderAll();
+    syncLayers();
+};
 window.deleteLayer = (e, btn, obj) => { if(obj) { getCanvas().remove(obj); syncLayers(); } };
 window.renameLayer = (obj) => {
     if (!obj) return;
